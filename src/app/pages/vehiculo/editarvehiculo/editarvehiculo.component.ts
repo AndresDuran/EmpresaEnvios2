@@ -8,22 +8,28 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgProgress } from 'ngx-progressbar';
 import { BarraProgresoService } from 'src/app/_service/barra-progreso.service';
 import { ProgressBarService } from 'src/app/_service/progress-bar.service';
+
+
 @Component({
   selector: 'app-editarvehiculo',
   templateUrl: './editarvehiculo.component.html',
   styleUrls: ['./editarvehiculo.component.css']
 })
+
+
 export class EditarvehiculoComponent implements OnInit {
+  
   public error: string;
   public mensajecorrecto: any;
-  public valorseleccionado: string;
-  public valorseleccionado2: string;
+  public valorseleccionado: number;
+  public valorseleccionado2: number;
   
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   form: FormGroup;
   vehiculo: Vehiculo = new Vehiculo();
   car: any;
+
 
   constructor(private vehiculoservice: VehiculoService,
               private formBuilder: FormBuilder, private _snackBar: MatSnackBar,
@@ -33,6 +39,7 @@ export class EditarvehiculoComponent implements OnInit {
               private route: ActivatedRoute) {
       this.buildForm();
     }
+
 
   ngOnInit(): void {
     this.progressBar.set();

@@ -1,23 +1,23 @@
 <ng-progress id="progressBar"  [color]="'white'"></ng-progress>
 <div>
-<h1 class="tittle">Registrar un vehículo</h1>
+<h1 class="tittle">Ingresar Datos De Nuevo Vehiculo</h1>
 
 <div class="center">
     <form [formGroup]="form" (ngSubmit)="guardarcarro($event)">
-        <span class="span">Ingrese la placa: </span>
+        <span class="span">Ingresar la placa : </span>
         <mat-form-field appearance="fill">
             <mat-label>Placa</mat-label>
-            <input matInput type="text" placeholder="Ejemplo: abc-123" formControlName="placa">
+            <input matInput type="text" placeholder="Por Ejemplo: abc-123" formControlName="placa">
         </mat-form-field>
         <div *ngIf="form.get('placa').errors && form.get('placa').touched">
             <p *ngIf="form.get('placa').hasError('maxlength') || form.get('placa').hasError('minlength')">
-                Placa inválida. Ejemplo: abc-123
+                Placa inválida. Por Ejemplo abc-123
             </p>
             <p class="campo" *ngIf="form.get('placa').hasError('required')">
-                Este un campo requerido
+                Campo Obligatorio
             </p>
         </div>
-        <span class="span">Seleccione la marca: </span>
+        <span class="span">Seleccionar Marca: </span>
         <mat-form-field appearance="fill">
             <mat-label>Marca</mat-label>
             <mat-select  [(value)]="valorseleccionado2" formControlName="marca">
@@ -36,23 +36,25 @@
         </mat-form-field>
         <div *ngIf="form.get('marca').errors && form.get('marca').touched">
             <p class="campo" *ngIf="form.get('marca').hasError('required')">
-                Este un campo requerido
+                Campo Obligatorio
             </p>
         </div>
-        <span class="span">Ingrese el modelo entre 1950 y 2022: </span>
+        <span class="span">Seleccionar Año De Modelo: </span>
         <mat-form-field appearance="fill">
             <mat-label>Modelo</mat-label>
             <input matInput type="text" placeholder="Ejemplo: 2010" formControlName="modelo">
         </mat-form-field>
         <div *ngIf="form.get('modelo').errors && form.get('modelo').touched">
             <p class="campo" *ngIf="form.get('modelo').hasError('required')">
-                Este un campo requerido
+                Campo Obligatorio
             </p>
             <p class="campo" *ngIf="form.get('modelo').hasError('min') || form.get('modelo').hasError('max')">
-                ¡Recuerde! Modelos desde 1950 a 2022.
+                Rango entre 1950 y 2022.
             </p>
         </div>
-        <span class="span">Seleccione el tipo de vehiculo: </span>
+
+
+        <span class="span">Seleccionar tipo de vehiculo: </span>
         <mat-form-field appearance="fill">
             <mat-label>Tipo de vehículo</mat-label>
             <mat-select [(value)]="valorseleccionado" formControlName="tipoVehiculo">
@@ -64,30 +66,32 @@
         </mat-form-field>
         <div *ngIf="form.get('tipoVehiculo').errors && form.get('tipoVehiculo').touched">
             <p class="campo" *ngIf="form.get('tipoVehiculo').hasError('required')">
-                Este un campo requerido
+                Campo Obligatorio
             </p>
         </div>
-        <span class="span">Ingrese la capacidad en kg: </span>
+
+
+        <span class="span">Capacidad (kg): </span>
         <mat-form-field appearance="fill">
             <mat-label>Capacidad</mat-label>
             <input matInput type="text" placeholder="Ejemplo: 750Kg" formControlName="capacidad">
         </mat-form-field>
         <div *ngIf="form.get('capacidad').errors && form.get('capacidad').touched">
             <p class="campo" *ngIf="form.get('capacidad').hasError('required')">
-                Este un campo requerido
+                Campo Obligatorio
             </p>
         </div>
         <div style="text-align: center;">
             <button mat-button color="warn" type="submit">
-                <mat-icon>task_alt</mat-icon>
-                <span> Registrar</span>
+                <mat-icon>done</mat-icon>
+                <span>Registrar</span>
             </button>
         </div>
     </form>
 </div>
 <button mat-flat-button color ="accent" class="btnback" routerLink="/vehiculo">
-    <mat-icon>logout</mat-icon>
-    <span> Regresar</span>
+    <mat-icon>cancel</mat-icon>
+    <span>Cancelar</span>
     </button>
     </div>
 <router-outlet></router-outlet>
