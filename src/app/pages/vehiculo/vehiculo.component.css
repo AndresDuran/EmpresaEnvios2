@@ -1,0 +1,15 @@
+table {
+    width: 100%;
+  }
+button{
+ background: aliceblue;
+}
+.mat-form-field {
+  font-size: 20px;
+  width: 77%;
+}
+.btnregister{
+  position: relative;
+    right: 80px;
+    bottom: -20px;
+}

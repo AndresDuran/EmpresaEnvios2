@@ -1,0 +1,103 @@
+<h1 class="tittle">Editar un vehículo</h1>
+<td mat-cell *matCellDef="let element"> {{element.placa}} </td>
+<div class="center">
+    <ng-container *ngIf="error != null">
+        <h3 class="center">
+            ¡ERROR! recuerde que la placa no debe estar registrada.
+        </h3>
+    </ng-container>
+    <ng-template *ngIf="mensajecorrecto == null">
+        <h3 class="center">
+            El vehiculo se ha editado correctamente.
+        </h3>
+    </ng-template>
+</div>
+<div class="center">
+    <form [formGroup]="form" (ngSubmit)="editarVehiculo($event)">
+        <span class="span">Ingrese la placa: </span>
+        <mat-form-field appearance="fill">
+            <mat-label>Placa</mat-label>
+            <input matInput  type="text" placeholder="Ejemplo: abc-123" formControlName="placa"> 
+        </mat-form-field>
+        <div *ngIf="form.get('placa').errors && form.get('placa').touched">
+            <p class="campo" *ngIf="form.get('placa').hasError('maxlength') || form.get('placa').hasError('minlength')">
+                Placa incorrecta. Ejemplo: abc-123
+            </p>
+            <p class="campo" *ngIf="form.get('placa').hasError('required')">
+                Este es un campo requerido
+            </p>
+        </div>
+        <span class="span">Seleccione la marca: </span>
+        <mat-form-field appearance="fill">      
+            <mat-label>Marca</mat-label>
+            <mat-select  [(value)]="valorseleccionado2" formControlName="marca">
+                <mat-option value="Toyota">Toyota</mat-option>
+                <mat-option value="Chevrolet">Chevrolet</mat-option>
+                <mat-option value="Reanult">Renault</mat-option>
+                <mat-option value="Mazda">Mazda</mat-option>
+                <mat-option value="Merdedes">Mercedes Benz</mat-option>
+                <mat-option value="BMW">BMW</mat-option>
+                <mat-option value="Alfa Romeo">Alfa Romeo</mat-option>
+                <mat-option value="Audi">Audi</mat-option>
+                <mat-option value="Ferrari">Ferrari</mat-option>
+                <mat-option value="Peugeot">Peugeot</mat-option>
+                <mat-option value="Porche">Porsche</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div *ngIf="form.get('marca').errors && form.get('marca').touched">
+            <p class="campo" *ngIf="form.get('marca').hasError('required')">
+                Este es un campo requerido
+        </p>
+        </div>
+        <span class="span">Ingrese el modelo entre 1950 y 2022: </span>
+        <mat-form-field appearance="fill">
+            <mat-label>Modelo</mat-label>
+            <input matInput type="text" placeholder="Ejemplo: 2010" formControlName="modelo">
+        </mat-form-field>
+        <div *ngIf="form.get('modelo').errors && form.get('modelo').touched">
+            <p class="campo" *ngIf="form.get('modelo').hasError('required')">
+                Este es un campo requerido
+            </p>
+            <p class="campo" *ngIf="form.get('modelo').hasError('min') || form.get('modelo').hasError('max')">
+                ¡Recuerde! Modelos desde 1950 a 2022.
+            </p>
+        </div>
+        <span class="span">Seleccione el tipo de vehiculo: </span>
+        <mat-form-field appearance="fill">
+            <mat-label>Tipo de vehículo</mat-label>
+            <mat-select [(value)]="valorseleccionado" formControlName="tipoVehiculo">
+                <mat-option value="Carro">Carro</mat-option>
+                <mat-option value="Camioneta">Camioneta</mat-option>
+                <mat-option value="Furgon">Furgón</mat-option>
+                <mat-option value="Campero">Campero</mat-option>
+               <mat-option value="Camión">Camión</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div *ngIf="form.get('tipoVehiculo').errors && form.get('tipoVehiculo').touched">
+            <p class="campo" *ngIf="form.get('tipoVehiculo').hasError('required')">
+                Este es un campo requerido
+            </p>
+        </div>
+        <span class="span">Ingrese la capacidad en kg: </span>
+        <mat-form-field appearance="fill">
+            <mat-label>Capacidad</mat-label>
+            <input matInput type="text" placeholder="Ejemplo: 750Kg" formControlName="capacidad">
+        </mat-form-field>
+        <div *ngIf="form.get('capacidad').errors && form.get('capacidad').touched">
+            <p class="campo" *ngIf="form.get('capacidad').hasError('required')">
+                Este es un campo requerido
+            </p>
+        </div>
+
+        <div style="text-align: center;">
+            <button mat-button color="warn" type="submit">
+                <mat-icon>update</mat-icon>
+                <span> Editar</span>
+            </button>
+        </div>
+    </form>
+</div>
+<button mat-flat-button color ="accent" class="btnback" routerLink="/vehiculo">
+    <mat-icon>logout</mat-icon>
+    <span> Regresar</span>
+    </button>

@@ -1,0 +1,76 @@
+button{
+    background-color: aliceblue;
+    position: relative;
+    left: 90px;
+    bottom: 12px;
+}
+.btnback{
+    background-color: aliceblue;
+    position: relative;
+    left: 500px;
+    bottom: 80px;
+}
+.div-right{
+    float: right;
+}
+
+.alinear{
+    text-align: center;
+}
+
+.column {
+    flex: 50%;
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+}
+
+button {
+    margin: 16px 8px;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-progress-bar{
+    position:fixed;
+    top:0px;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.example-container {
+    width: auto;
+    height: 1000px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.example-sidenav {
+    padding: 20px;
+}
+.span
+{
+font-family:cursive;
+font-size: medium;
+}
+.campo{
+color: red;
+}
+.tittle{
+    font-family:cursive;
+    text-align: center;
+    font-size: x-large;  
+}
