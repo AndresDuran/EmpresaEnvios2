@@ -15,33 +15,32 @@
 
 
       <span class="example-spacer"></span>
-
+      <ng-container *ngIf="this.estaLogueado">
       <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
         </button>
-
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item [routerLink]="['/perfil']">
-                <mat-icon>account_box</mat-icon>
-                <span>Mi Perfil</span>
-            </button>
-            <button mat-menu-item >
-                <mat-icon>exit_to_app</mat-icon>
-                <span>Cerrar Sesión</span>
-            </button>  
-        </mat-menu>
+      </ng-container>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/perfil']">
+            <mat-icon>account_box</mat-icon>
+            <span>Mi Perfil</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/ingresar']">
+          <mat-icon>manage accounts</mat-icon>
+          <span>Ingresar</span>
+        </button>
+        <button mat-menu-item (click)="cerrarsesion()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Cerrar Sesión</span>
+        </button>
+     
+    </mat-menu>
   </mat-toolbar>
-
-
-
-
-
-
   <mat-drawer-container class="example-sidenav-content" autosize>
     <mat-drawer #drawer style="width: 200px" mode="side">
 
         <img src="assets/logo_deadpool.png" width="200"/>
-  
+        <ng-container *ngIf="this.estaLogueado">
         <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer;" [routerLink]="['/buscar']">
             <mat-icon>search</mat-icon>
             <span>Buscar</span>
@@ -58,7 +57,10 @@
           <mat-icon>commute</mat-icon>
           <span>Vehiculo</span>
         </button>
-        <mat-divider></mat-divider>          
+      </ng-container>
+      <br>
+        <div style="color: black" class="center">
+        </div>         
       
     </mat-drawer>
 

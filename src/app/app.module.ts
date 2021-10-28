@@ -9,7 +9,7 @@ import { MaterialModule} from './material/material.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { EditarComponent } from './pages/editar/editar.component';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DepartamentoComponent } from './pages/departamento/departamento.component';
 import { CiudadComponent } from './pages/departamento/ciudad/ciudad.component';
 import { VehiculoComponent } from './pages/vehiculo/vehiculo.component';
@@ -21,6 +21,14 @@ import { ErrorInterceptorService } from './_share/error-interceptor.service';
 import { InterceptorService } from './loader/interceptor.service';
 import { NgProgressModule } from "ngx-progressbar";
 import { NgProgressHttpModule } from "ngx-progressbar/http";
+import { NotAllowedComponent } from './pages/not-allowed/not-allowed.component';
+import { environment } from 'src/environments/environment';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+  let tk = sessionStorage.getItem(environment.TOKEN);
+  return tk != null ? tk : '';
+}
 
 @NgModule({
   declarations: [
@@ -35,7 +43,8 @@ import { NgProgressHttpModule } from "ngx-progressbar/http";
     RegistrarComponent,
     EditarvehiculoComponent,
     NotFoundComponent,
-    Error500Component
+    Error500Component,
+    NotAllowedComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +55,20 @@ import { NgProgressHttpModule } from "ngx-progressbar/http";
     HttpClientModule,
     ReactiveFormsModule,
     NgProgressModule,
-    NgProgressHttpModule
+    NgProgressHttpModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['159.223.107.103:8080'],
+        disallowedRoutes: ['http://159.223.107.103:8080/movitapp-backend/oauth/token'],
+      },
+    }),
   ],
-  providers: [  ],
+  providers: [ {
+    provide:  HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorService,
+      multi:    true
+  } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

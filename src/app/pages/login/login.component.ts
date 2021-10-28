@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/_service/login.service';
+import { environment } from 'src/environments/environment';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Component({
   selector: 'app-login',
@@ -7,12 +10,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  @Input()
-  resultadoHija: number;
-
-  constructor() { }
+  constructor(private loginservice: LoginService) { }
 
   ngOnInit(): void {
+    this.loginservice.login('admin', '123456').subscribe(data => {
+      sessionStorage.setItem(environment.TOKEN, data.access_token);
+      })
   }
 
 }
