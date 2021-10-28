@@ -6,17 +6,13 @@ import { NgProgressRef } from 'ngx-progressbar';
 })
 export class ProgressBarService {
   progressRef: NgProgressRef;
-
-
   default:string = "#FFFFFF";
   currentColor: string = this.default;
   constructor() {}
 
-  
     startLoading() {
       this.currentColor = this.default;
       this.progressRef.start();
-     
     }
   inc(){
     this.progressRef.inc(100);
@@ -27,7 +23,5 @@ export class ProgressBarService {
     completeLoading() {
       this.currentColor = this.default;
       this.progressRef.complete();
-     
     }
-    
 }

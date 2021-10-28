@@ -26,24 +26,31 @@ export class ErrorInterceptorService implements HttpInterceptor {
         }
       }
     })).pipe(catchError((err) => {
+    
       const str = err.error.message;
-
-      const statusCode = err.error.status.toString();
-
-      if (statusCode.charAt(0) === '4'){
+      
+      if(err.error.status == 400) {
         this.openSnackBar(str.slice(4, str.length));
-      } else if (statusCode.charAt(0) === '5'){
-        this.router.navigate(['/error500']);
+      } else if(err.status == "401") {  
+        this.router.navigate(['/nopermiso']);
+      }  else if(err.error.status == 404) {
+            this.openSnackBar(err.error.message);
+      } else if(err.error.status == 405) {
+            this.openSnackBar(err.error.message);
+      } else if(err.error.status == 415) {
+            this.openSnackBar(err.error.message);
+      } else  if(err.error.status == 500) {
+            this.router.navigate(['/error500']);
       }
       return EMPTY;
-    }));
-  }
+}));
+}
 
-  openSnackBar(error: string): void {
-    this._snackBar.open(error, 'OK', {
-      duration: 10000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition
-    });
-  }
+private openSnackBar(mensaje: string) {
+  this._snackBar.open(mensaje, 'Información', {
+    duration: 2000,
+    horizontalPosition: 'center',
+    verticalPosition: 'top',
+});
+}
 }
