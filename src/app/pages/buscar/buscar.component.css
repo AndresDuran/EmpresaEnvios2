@@ -1,0 +1,23 @@
+.center{
+    display: flex;
+    justify-content: center;
+    font-family: monospace;
+}
+.center1{
+    background-color:white;
+    display: flex;
+    justify-content: center;
+}
+.censadsd{
+    align-content: center;
+
+}
+.censadsd,.p{
+ text-align: center;
+ font-family: monospace;
+ font-size: x-large;
+
+}
+.cuadro{
+    background-color:rgb(54, 54, 54);
+}

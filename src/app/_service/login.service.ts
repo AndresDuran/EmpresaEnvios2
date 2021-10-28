@@ -23,7 +23,7 @@ public cerrarSesion(){
   const tk = sessionStorage.getItem(environment.TOKEN);
   this.http.get(`${environment.HOST}/cerrarSesion/anular/${tk}`).subscribe(data =>{
         sessionStorage.clear();
-        this.router.navigate(['login']);
+        this.router.navigate(['login']).then(() => { window.location.reload(); });
   });
 }
 

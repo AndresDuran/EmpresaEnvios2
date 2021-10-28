@@ -32,25 +32,34 @@ export class ErrorInterceptorService implements HttpInterceptor {
       if(err.error.status == 400) {
         this.openSnackBar(str.slice(4, str.length));
       } else if(err.status == "401") {  
-        this.router.navigate(['/nopermiso']);
-      }  else if(err.error.status == 404) {
-            this.openSnackBar(err.error.message);
-      } else if(err.error.status == 405) {
-            this.openSnackBar(err.error.message);
-      } else if(err.error.status == 415) {
-            this.openSnackBar(err.error.message);
-      } else  if(err.error.status == 500) {
-            this.router.navigate(['/error500']);
+        if (str === 'No Autorizado Para Esta Página')
+        {
+          this.openSnackBar(str);
+          this.router.navigate(['/nopermiso']);
+        } else {
+          this.openSnackBar(str.slice(4, str.length));
+        }
+      }else if (err.status === 404) {
+        this.openSnackBar(str.slice(4, str.length));
+        this.openSnackBar(err.error.message);
+      } else if (err.error.status === 405){
+        this.openSnackBar(str.slice(4, str.length));
+        this.openSnackBar(err.error.message);
+      } else if (err.error.status === 415) {
+        this.openSnackBar(str.slice(4, str.length));
+        this.openSnackBar(err.error.message);
+      } else if (err.error.status === 500) {
+        this.router.navigate(['/error500']);
       }
       return EMPTY;
 }));
 }
 
 private openSnackBar(mensaje: string) {
-  this._snackBar.open(mensaje, 'Información', {
+  this._snackBar.open(mensaje, 'OK', {
     duration: 2000,
-    horizontalPosition: 'center',
-    verticalPosition: 'top',
+    horizontalPosition: this.horizontalPosition,
+    verticalPosition: this.verticalPosition,
 });
 }
 }

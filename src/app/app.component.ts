@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarraProgresoService } from 'src/app/_service/barra-progreso.service'
+import { LoginService } from './_service/login.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,14 +9,19 @@ import { BarraProgresoService } from 'src/app/_service/barra-progreso.service'
 export class AppComponent implements OnInit{
 
   public flagProgressBar: boolean = true;
+  public estaLogueado: boolean;
+  constructor(private barraProgresoService: BarraProgresoService, 
+    private login: LoginService) {
 
-  constructor(private barraProgresoService: BarraProgresoService ){}
-
+    }
   ngOnInit():void{
 
 this.barraProgresoService.progressBarReactiva.subscribe(data => {
 this.flagProgressBar = !this.flagProgressBar;
 });
-
+this.estaLogueado = this.login.estaLogueado();
+  }
+  cerrarsesion():void{
+    this.login.cerrarSesion();
   }
 }
