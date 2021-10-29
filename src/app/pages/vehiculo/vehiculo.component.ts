@@ -38,17 +38,6 @@ this.progressBar.progressRef = this.progress.ref('progressBar');
     this.listar();
   }
 
-/*
-    let vehiculo: Vehiculo = new Vehiculo();
-    vehiculo.placa = "abc-789";
-    vehiculo.modelo = "2021";
-    vehiculo.marca = "Renault";
-    vehiculo.tipoVehiuclo = "Carga";
-    vehiculo.capacidad = "120Kg"; 
-
-    this.vehiculoService.guardar(vehiculo).subscribe(data =>{
-        console.log("Se registro vehiculo");
-      });*/
 
       private listar(){
         this.progressBar.startLoading();
@@ -63,10 +52,11 @@ this.vehiculoService.listar(0, 20).pipe(
    public paginador(event: PageEvent): void{
     let page = event.pageIndex;
     let size = event.pageSize;
-    this.progressBar.startLoading();
+    //this.progressBar.startLoading();
     this.vehiculoService.paginador(page, size).pipe(
       map((inform: Info)=>this.dataSource=inform)).subscribe(data=>{
        
+        console.log("Aqui");
         
         this.ListaVehiculos = new MatTableDataSource(data.content);
         this.ListaVehiculos.sort = this.sort;
@@ -75,7 +65,7 @@ this.vehiculoService.listar(0, 20).pipe(
   }
   public filtro = async (value: string) => {
     this.barraProgresoService.progressBarReactiva.next(false);
-    await new Promise(f => setTimeout(f, 500));
+    await new Promise(f => setTimeout(f, 5000));
     this.ListaVehiculos.filter = value.trim().toLocaleLowerCase();
     this.barraProgresoService.progressBarReactiva.next(true);
   }}

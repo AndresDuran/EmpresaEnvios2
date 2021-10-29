@@ -45,6 +45,7 @@ export function tokenGetter() {
     NotFoundComponent,
     Error500Component,
     NotAllowedComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -64,11 +65,13 @@ export function tokenGetter() {
       },
     }),
   ],
-  providers: [ {
-    provide:  HTTP_INTERCEPTORS,
+  providers:[
+    {
+      provide:  HTTP_INTERCEPTORS,
       useClass: ErrorInterceptorService,
       multi:    true
-  } ],
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
